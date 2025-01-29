@@ -11,6 +11,20 @@ import insta485
 @insta485.app.route('/')
 def show_index():
     """Display / route."""
+
+        # Connect to database
+    connection = insta485.model.get_db()
+
+    # Query database
+    logname = "awdeorio"
+    cur = connection.execute(
+        "SELECT username, fullname "
+        "FROM users "
+        "WHERE username != ?",
+        (logname, )
+    )
+    users = cur.fetchall()
+    
     context = {}
     return flask.render_template("index.html", **context)
 
