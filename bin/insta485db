@@ -50,6 +50,7 @@ case $1 in
     for table in $(sqlite3 "var/insta485.sqlite3" ".tables"); do
         echo "+ sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM $table'"
         sqlite3 -batch -line "var/insta485.sqlite3" "SELECT * FROM $table"
+    done
     ;;
   *)
     usage
