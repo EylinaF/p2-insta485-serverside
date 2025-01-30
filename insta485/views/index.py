@@ -62,7 +62,8 @@ def show_index():
         )
 
         post["comments"] = cur.fetchall()
-
+        post["img_url"] = f"/uploads/{post['img_url']}"
+        post["owner_img_url"] = f"/uploads/{post['owner_img_url']}"
         post["timestamp"] = arrow.get(post["timestamp"]).humanize()
     
     context = {
