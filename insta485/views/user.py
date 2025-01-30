@@ -83,4 +83,4 @@ def show_user_profile(user_url_slug):
         "posts": posts,
     }
 
-    return flask.render_template("index.html", **context)
+    return flask.render_template("user.html", **context)
