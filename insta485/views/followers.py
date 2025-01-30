@@ -7,7 +7,7 @@ URLs include:
 import flask
 import insta485
 
-@insta485.app.route('/users/<user_url_slug>/followers')
+@insta485.app.route('/users/<user_url_slug>/followers/')
 def show_followers(user_url_slug):
     """Display user following page."""
 
@@ -22,64 +22,39 @@ def show_followers(user_url_slug):
     # Connect to database
     connection = insta485.model.get_db()
 
-    # Query database
     cur = connection.execute(
-    "SELECT username, fullname FROM users WHERE username = ?",
-    (user_url_slug,)
+        "SELECT username FROM users WHERE username = ?",
+        (user_url_slug,)
     )
     user = cur.fetchone()
 
     if user is None:
         flask.abort(404)
-    
-    cur = connection.execute(
-    "SELECT COUNT(*) AS total_posts FROM posts WHERE owner = ?",
-    (user_url_slug,)
-    )
-    total_posts = cur.fetchone()["total_posts"]
 
     cur = connection.execute(
-    "SELECT COUNT(*) AS followers FROM following WHERE username2 = ?",
-    (user_url_slug,)
+        """
+        SELECT users.username, users.filename AS user_img_url
+        FROM following
+        JOIN users ON following.username1 = users.username
+        WHERE following.username2 = ?
+        """,
+        (user_url_slug,)
     )
-    followers = cur.fetchone()["followers"]
+    followers = cur.fetchall()
 
-    cur = connection.execute(
-    "SELECT COUNT(*) AS following FROM following WHERE username1 = ?",
-    (user_url_slug,)
-    )
-    following = cur.fetchone()["following"]
+    for follower in followers:
+        follower["user_img_url"] = f"/uploads/{follower['user_img_url']}"
 
-    cur = connection.execute(
-    "SELECT 1 FROM following WHERE username1 = ? AND username2 = ? ",
-    (logname, user_url_slug)
-    )
+        cur = connection.execute(
+        "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
+        (logname, follower["username"])
+        )
+        follower["logname_follows_username"] = cur.fetchone() is not None
 
-    logname_follows_username = cur.fetchone() is not None
-
-    cur = connection.execute(
-    """
-    SELECT posts.postid, posts.filename AS img_url
-    FROM posts
-    WHERE posts.owner = ?
-    ORDER BY posts.postid DESC
-    """,
-    (user_url_slug,)
-    )
-    posts = cur.fetchall()
-    
-    for post in posts:
-        post["img_url"] = f"/uploads/{post['img_url']}"
-    
     context = {
         "logname": logname,
-        "username": user["username"],
-        "logname_follows_username": logname_follows_username,
-        "fullname": user["fullname"],
-        "following": following,
+        "username": user_url_slug,
         "followers": followers,
-        "total_posts" : total_posts,
-        "posts": posts,
     }
 
-    return flask.render_template("user.html", **context)
+    return flask.render_template("followers.html", **context)
