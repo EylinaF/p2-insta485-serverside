@@ -66,8 +66,16 @@
                 {{following}} following</a>
         </p>
 
-
         <p>{{fullname}}</p>
+
+        {% if logname == username %}
+        <form action="<FIXME_POSTS_URL_HERE>?target=<FIXME_CURRENT_PAGE_URL_HERE>" method="post"
+            enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required />
+            <input type="submit" name="create_post" value="upload new post" />
+            <input type="hidden" name="operation" value="create" />
+        </form>
+
         {% for post in posts %}
         <a href="/posts/{{post.postid}}/"><img src="{{post.img_url}}" alt="Post {{post.postid}}"></a>
         {% endfor %}
