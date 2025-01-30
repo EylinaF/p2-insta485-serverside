@@ -9,3 +9,4 @@ from insta485.views.explore import show_explore
 from insta485.views.login import show_login
 from insta485.views.likes import update_likes
 from insta485.views.comments import handle_comments
+from insta485.views.posts_change import manage_posts
