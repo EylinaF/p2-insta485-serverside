@@ -6,7 +6,6 @@ URLs include:
 """
 import flask
 import insta485
-import arrow
 
 
 @insta485.app.route('/users/<user_url_slug>/')
@@ -29,7 +28,7 @@ def show_user_profile(user_url_slug):
     "SELECT username, fullname FROM users WHERE username = ?",
     (user_url_slug,)
     )
-    user = cur.fetchall()
+    user = cur.fetchone()
 
     if user is None:
         flask.abort(404)
@@ -70,6 +69,9 @@ def show_user_profile(user_url_slug):
     )
     posts = cur.fetchall()
     
+    for post in posts:
+        post["img_url"] = f"/uploads/{post['img_url']}"
+    
     context = {
         "logname": logname,
         "username": user["username"],
@@ -80,5 +82,5 @@ def show_user_profile(user_url_slug):
         "total_posts" : total_posts,
         "posts": posts,
     }
-    
+
     return flask.render_template("index.html", **context)
