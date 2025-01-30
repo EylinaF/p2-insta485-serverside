@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>insta485</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="insta">
+            <div class="left">
+                <a href="/" class="logo">
+                    <img src="/static/images/logo.png" alt="logo">
+                </a>
+                <h2><a href="/" class="logo">Insta485</a></h2>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form action="<FIXME_ACCOUNTS_URL_HERE>?target=<FIXME_INDEX_URL_HERE>" method="post"
+            enctype="multipart/form-data">
+            <input type="text" name="username" required />
+            <input type="password" name="password" required />
+            <input type="submit" value="login" />
+            <input type="hidden" name="operation" value="login" />
+        </form>
+        <p>Don't have an account? <a href="/accounts/create/">Sign up</a></p>
+    </main>
+</body>
+
+</html>
