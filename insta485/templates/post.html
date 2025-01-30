@@ -45,7 +45,23 @@
             <p><a href="/users/{{comment.owner}}/">
                     <b>{{comment.owner}}</b>
                 </a> {{comment.text}}</p>
+            {% if logname == comment.owner %}
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="<FIXME_COMMENTS_URL_HERE>?target=<FIXME_CURRENT_PAGE_URL_HERE>" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="delete"/>
+                <input type="hidden" name="commentid" value="<FIXME_COMMENT_ID_HERE>"/>
+                <input type="submit" name="uncomment" value="delete"/>
+            </form>
+            {% endif  %}
             {% endfor %}
+            {% if logname == owner %}
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="<FIXME_POSTS_URL_HERE>?target=<FIXME_LOGGED_IN_USER_PAGE_URL_HERE>" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="delete"/>
+                <input type="hidden" name="postid" value="<FIXME_POST_ID_HERE>"/>
+                <input type="submit" name="delete" value="delete this post"/>
+            </form>
+            {% endif  %}
         </footer>
     </article>
 </body>
