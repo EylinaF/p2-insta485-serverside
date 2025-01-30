@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>insta485</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <div class="insta">
             <div class="left">
                 <a href="/" class="logo">
-                    <img src="/images/logo.png" alt="logo">
+                    <img src="/static/images/logo.png" alt="logo">
                 </a>
                 <h2><a href="/" class="logo">Insta485</a></h2>
             </div>
@@ -35,10 +35,22 @@
             <p>{% if logname != follow.username %}
                 {% if follow.logname_follows_username %}
                 following
-                {% else %}
-                not following
-                {% endif %}
-                {% endif %}
+            <form action="<FIXME_FOLLOWING_URL_HERE>?target=<FIXME_CURRENT_PAGE_URL_HERE>" method="post"
+                enctype="multipart/form-data">
+                <input type="submit" name="unfollow" value="unfollow" />
+                <input type="hidden" name="username" value="<FIXME_USERNAME_HERE>" />
+                <input type="hidden" name="operation" value="unfollow" />
+            </form>
+            {% else %}
+            not following
+            <form action="<FIXME_FOLLOWING_URL_HERE>?target=<FIXME_CURRENT_PAGE_URL_HERE>" method="post"
+                enctype="multipart/form-data">
+                <input type="submit" name="follow" value="follow" />
+                <input type="hidden" name="username" value="<FIXME_USERNAME_HERE>" />
+                <input type="hidden" name="operation" value="follow" />
+            </form>
+            {% endif %}
+            {% endif %}
             </p>
         </div>
         {% endfor %}
