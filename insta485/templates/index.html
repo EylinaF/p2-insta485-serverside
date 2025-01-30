@@ -51,15 +51,15 @@
             </footer>
             {% if post.liked_by_user %}
             <form action="/likes/?target={{ request.path }}" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="operation" value="unlike">
-                <input type="hidden" name="postid" value="{{ post.postid }}">
-                <input type="submit" value="Unlike">
+                <input type="hidden" name="operation" value="unlike" />
+                <input type="hidden" name="postid" value="{{post.postid}}" />
+                <input type="submit" name="unlike" value="unlike" />
             </form>
             {% else %}
             <form action="/likes/?target={{ request.path }}" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="operation" value="like">
-                <input type="hidden" name="postid" value="{{ post.postid }}">
-                <input type="submit" value="Like">
+                <input type="hidden" name="operation" value="like" />
+                <input type="hidden" name="postid" value="{{post.postid}}" />
+                <input type="submit" name="like" value="like" />
             </form>
             {% endif %}
 
@@ -67,7 +67,7 @@
                 <input type="hidden" name="operation" value="create">
                 <input type="hidden" name="postid" value="{{ post.postid }}">
                 <input type="text" name="text" required>
-                <input type="submit" value="Comment">
+                <input type="submit" name="comment" value="comment" />
             </form>
         </article>
         {% endfor %}
