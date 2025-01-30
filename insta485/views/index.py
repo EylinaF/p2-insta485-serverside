@@ -6,24 +6,67 @@ URLs include:
 """
 import flask
 import insta485
+import arrow
 
 
 @insta485.app.route('/')
 def show_index():
     """Display / route."""
 
+    """
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('login'))
+
+    logname = flask.session['username']
+    """
+    logname = "awdeorio"
+
     # Connect to database
     connection = insta485.model.get_db()
 
     # Query database
-    logname = "awdeorio"
     cur = connection.execute(
-        "SELECT username, fullname "
-        "FROM users "
-        "WHERE username != ?",
-        (logname, )
+    """
+    SELECT posts.postid, posts.filename AS img_url, posts.created AS timestamp, users.username, users.filename AS owner_img_url
+    FROM posts
+    JOIN users ON posts.owner = users.username
+    WHERE posts.owner = ? OR posts.owner IN (
+        SELECT username2 FROM following WHERE username1 = ?
     )
-    users = cur.fetchall()
+    ORDER BY posts.postid DESC
+    """,
+    (logname, logname)
+    )
+    posts = cur.fetchall()
 
-    context = {"users": users}
+    for post in posts:
+        cur = connection.execute(
+            "SELECT COUNT(*) AS like_count FROM likes WHERE postid = ?", (post["postid"],)
+        )
+        post["likes"] = cur.fetchone()["like_count"]
+
+        cur = connection.execute(
+            "SELECT 1 FROM likes WHERE postid = ? AND owner = ?", (post["postid"], logname)
+        )
+        post["liked_by_user"] = cur.fetchone() is not None
+
+        cur = connection.execute(
+            """
+            SELECT users.username AS owner, comments.text
+            FROM comments
+            JOIN users ON comments.owner = users.username
+            WHERE comments.postid = ?
+            ORDER BY comments.created ASC
+            """,
+            (post["postid"],)
+        )
+
+        post["comments"] = cur.fetchall()
+
+        post["timestamp"] = arrow.get(post["timestamp"]).humanize()
+    
+    context = {
+        "logname": logname,
+        "posts": posts,
+    }
     return flask.render_template("index.html", **context)
