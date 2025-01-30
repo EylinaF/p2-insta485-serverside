@@ -25,5 +25,5 @@ def show_index():
     )
     users = cur.fetchall()
 
-    context = {}
+    context = {"users": users}
     return flask.render_template("index.html", **context)

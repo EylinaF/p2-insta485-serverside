@@ -2,50 +2,10 @@
 <html lang="en">
 
 <body>
-
-    {% block content %}
-      {% for post in posts %}
-        <div class="post">
-          <div class="post-header">
-            <img src="{{ url_for('uploads', filename=post.owner_img) }}" class="profile-pic">
-            <a href="{{ url_for('show_user', user_url_slug=post.owner) }}">{{ post.owner }}</a>
-            <span class="timestamp">{{ post.human_time }}</span>
-          </div>
-          <img src="{{ url_for('uploads', filename=post.filename) }}" class="post-image">
-          <div class="post-footer">
-            <p>{{ post.likes }} like{{ post.likes|pluralize }}</p>
-    
-            {% if post.liked %}
-              <form action="{{ url_for('update_likes') }}" method="post">
-                <input type="hidden" name="operation" value="unlike">
-                <input type="hidden" name="postid" value="{{ post.postid }}">
-                <input type="submit" value="Unlike">
-              </form>
-            {% else %}
-              <form action="{{ url_for('update_likes') }}" method="post">
-                <input type="hidden" name="operation" value="like">
-                <input type="hidden" name="postid" value="{{ post.postid }}">
-                <input type="submit" value="Like">
-              </form>
-            {% endif %}
-    
-            <div class="comments">
-              {% for comment in post.comments %}
-                <p><a href="{{ url_for('show_user', user_url_slug=comment.owner) }}">{{ comment.owner }}</a>: {{ comment.text }}</p>
-              {% endfor %}
-            </div>
-    
-            <form action="{{ url_for('update_comments') }}" method="post">
-              <input type="hidden" name="operation" value="create">
-              <input type="hidden" name="postid" value="{{ post.postid }}">
-              <input type="text" name="text" required>
-              <input type="submit" value="Comment">
-            </form>
-          </div>
-        </div>
-      {% endfor %}
-    {% endblock %}
-    
+    <h1>Users</h1>
+    {% for user in users %}
+    <p>{{user.username}} {{user.fullname}}</p>
+    {% endfor %}
 </body>
 
 </html>
