@@ -4,3 +4,4 @@ from insta485.views.uploads import get_uploaded_file
 from insta485.views.user import show_user_profile
 from insta485.views.followers import show_followers
 from insta485.views.following import show_following
+from insta485.views.posts import show_post
