@@ -2,14 +2,14 @@
 Insta485 index (main) view.
 
 URLs include:
-/users/<user_url_slug>/
+/users/<user_url_slug>/followers/
 """
 import flask
 import insta485
 
-@insta485.app.route('/users/<user_url_slug>/')
-def show_user_profile(user_url_slug):
-    """Display user profile page."""
+@insta485.app.route('/users/<user_url_slug>/followers')
+def show_followers(user_url_slug):
+    """Display user following page."""
 
     """
     if 'username' not in flask.session:
