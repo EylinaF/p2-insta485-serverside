@@ -9,7 +9,7 @@ LOGGER = flask.logging.create_logger(insta485.app)
 def update_likes():
     """Handle liking and unliking a post."""
     #logname = flask.session.get("username")
-    logname = awdeorio
+    logname = "awdeorio"
     if not logname:
         flask.abort(403)  # Unauthorized if not logged in
 
