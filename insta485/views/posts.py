@@ -11,11 +11,9 @@ def show_post(postid_url_slug):
     #logname = flask.session.get("username")
 
     connection = insta485.model.get_db()
-
     cur = connection.execute(
         """
-        SELECT posts.postid, posts.filename AS img_url, posts.created AS timestamp,
-               users.username AS owner, users.filename AS owner_img_url
+        SELECT posts.postid, posts.filename AS img_url, posts.created AS timestamp, users.username, users.filename AS owner_img_url
         FROM posts
         JOIN users ON posts.owner = users.username
         WHERE posts.postid = ?
@@ -57,7 +55,13 @@ def show_post(postid_url_slug):
     # Prepare context
     context = {
         "logname": logname,
-        "post": post,
+        "postid": post["postid"],
+        "owner": post["username"],
+        "owner_img_url": post["owner_img_url"],
+        "img_url": post["img_url"],
+        "timestamp": post["timestamp"],
+        "likes": post["likes"],
+        "comments": post["comments"]
     }
 
     return flask.render_template("post.html", **context)
