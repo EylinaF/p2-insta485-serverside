@@ -54,6 +54,26 @@
             </form>
             {% endif  %}
             {% endfor %}
+            {% if liked_by_user %}
+            <form action="/likes/?target={{ request.path }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="unlike">
+                <input type="hidden" name="postid" value="{{ postid }}">
+                <input type="submit" value="Unlike">
+            </form>
+            {% else %}
+            <form action="/likes/?target={{ request.path }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="like">
+                <input type="hidden" name="postid" value="{{ postid }}">
+                <input type="submit" value="Like">
+            </form>
+            {% endif %}
+
+            <form action="/comments/?target={{ request.path }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="create">
+                <input type="hidden" name="postid" value="{{ postid }}">
+                <input type="text" name="text" required>
+                <input type="submit" value="Comment">
+            </form>
             {% if logname == owner %}
             <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
             <form action="<FIXME_POSTS_URL_HERE>?target=<FIXME_LOGGED_IN_USER_PAGE_URL_HERE>" method="post" enctype="multipart/form-data">

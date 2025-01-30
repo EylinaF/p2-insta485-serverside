@@ -61,6 +61,7 @@ def show_post(postid_url_slug):
         "img_url": post["img_url"],
         "timestamp": post["timestamp"],
         "likes": post["likes"],
+        "liked_by_user": post["liked_by_user"],
         "comments": post["comments"]
     }
 
