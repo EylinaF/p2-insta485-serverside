@@ -9,9 +9,14 @@ import insta485
 
 @insta485.app.route('/comments/', methods=["POST"])
 def handle_comments():
-    """Display login page."""
+    """Update comments"""
+    
+    """
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('login'))
 
-    if "username" in flask.session:
-        return flask.redirect(flask.url_for("show_index"))
+    logname = flask.session['username']
+    """
 
-    return flask.render_template("login.html")
+    logname = "awdeorio"
+    
