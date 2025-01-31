@@ -16,6 +16,6 @@ def show_delete():
 
     logname = flask.session['username']
     context = {
-        "logname" = logname
+        "logname": logname
     }
     return flask.render_template("delete.html", **context)
