@@ -17,7 +17,10 @@ def show_edit():
 
     connection = insta485.model.get_db()
 
-    cur = connection.
+    cur = connection.execute(
+        "SELECT email, fullname, p FROM users WHERE username = ?",
+        (logname,)
+    )
     context = {
         "email": email,
         "fullname": fullname,

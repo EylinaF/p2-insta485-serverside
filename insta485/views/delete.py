@@ -14,4 +14,6 @@ def show_delete():
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('/accounts/login/'))
 
+    logname = flask.session['username']
+    
     return flask.render_template("delete.html")
