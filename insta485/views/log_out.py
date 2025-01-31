@@ -9,9 +9,9 @@ import insta485
 
 LOGGER = flask.logging.create_logger(insta485.app)
 
+
 @insta485.app.route('/accounts/logout/', methods=["POST"])
 def log_out():
-   
     """
     logout and return to login
     """

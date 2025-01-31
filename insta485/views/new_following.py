@@ -9,6 +9,7 @@ import insta485
 
 LOGGER = flask.logging.create_logger(insta485.app)
 
+
 @insta485.app.route('/following/', methods=["POST"])
 def handle_following():
     """Update following"""
@@ -17,7 +18,6 @@ def handle_following():
         return flask.redirect("/accounts/login/")
 
     logname = flask.session['username']
-
 
     connection = insta485.model.get_db()
 
@@ -36,8 +36,8 @@ def handle_following():
             flask.abort(409)
 
         connection.execute(
-        "INSERT INTO following (username1, username2) VALUES (?, ?)",
-        (logname, username)
+            "INSERT INTO following (username1, username2) VALUES (?, ?)",
+            (logname, username)
         )
     elif operation == "unfollow":
         cur = connection.execute(
@@ -51,5 +51,5 @@ def handle_following():
             "DELETE FROM following WHERE username1 = ? AND username2 = ?",
             (logname, username)
         )
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.redirect(target)

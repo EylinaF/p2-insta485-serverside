@@ -16,7 +16,6 @@ def manage_posts():
 
     logname = flask.session['username']
 
-
     operation = flask.request.form.get("operation")
     target_url = flask.request.args.get("target", f"/users/{logname}/")
 
@@ -26,18 +25,18 @@ def manage_posts():
 
     if operation == "create":
 
-        if "file" not in flask.request.files or flask.request.files["file"].filename == "":
-            flask.abort(400) 
-
+        if (
+            "file" not in flask.request.files
+            or flask.request.files["file"].filename == ""
+        ):
+            flask.abort(400)
 
         fileobj = flask.request.files["file"]
         filename = fileobj.filename
 
-
         stem = uuid.uuid4().hex
         suffix = pathlib.Path(filename).suffix.lower()
         uuid_basename = f"{stem}{suffix}"
-
 
         save_path = insta485.app.config["UPLOAD_FOLDER"] / uuid_basename
         fileobj.save(save_path)
@@ -54,7 +53,6 @@ def manage_posts():
         if not postid:
             flask.abort(400)
 
-
         cur = connection.execute(
             "SELECT filename, owner FROM posts WHERE postid = ?", (postid,)
         )
@@ -65,11 +63,9 @@ def manage_posts():
         if post["owner"] != logname:
             flask.abort(403)
 
-
         file_path = insta485.app.config["UPLOAD_FOLDER"] / post["filename"]
         if os.path.exists(file_path):
             os.remove(file_path)
-
 
         connection.execute("DELETE FROM likes WHERE postid = ?", (postid,))
         connection.execute("DELETE FROM comments WHERE postid = ?", (postid,))
@@ -79,5 +75,5 @@ def manage_posts():
 
     else:
         flask.abort(400)
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.redirect(target_url)

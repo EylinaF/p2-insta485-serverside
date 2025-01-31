@@ -7,6 +7,7 @@ URLs include:
 import flask
 import insta485
 
+
 @insta485.app.route('/accounts/login/')
 def show_login():
     """Display login page."""

@@ -7,10 +7,11 @@ URLs include:
 import flask
 import insta485
 LOGGER = flask.logging.create_logger(insta485.app)
+
+
 @insta485.app.route('/users/<user_url_slug>/followers/')
 def show_followers(user_url_slug):
     """Display user following page."""
-
 
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
@@ -44,8 +45,8 @@ def show_followers(user_url_slug):
         follower["user_img_url"] = f"/uploads/{follower['user_img_url']}"
 
         cur = connection.execute(
-        "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
-        (logname, follower["username"])
+            "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
+            (logname, follower["username"])
         )
         follower["logname_follows_username"] = cur.fetchone() is not None
 
@@ -54,5 +55,5 @@ def show_followers(user_url_slug):
         "username": user_url_slug,
         "followers": followers,
     }
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.render_template("followers.html", **context)

@@ -7,16 +7,15 @@ URLs include:
 import flask
 import insta485
 
+
 @insta485.app.route('/explore/')
 def show_explore():
     """Display user following page."""
 
-    
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
 
     logname = flask.session['username']
-    
 
     # Connect to database
     connection = insta485.model.get_db()
@@ -46,5 +45,5 @@ def show_explore():
         "logname": logname,
         "expo_users": expo_users,
     }
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.render_template("explore.html", **context)

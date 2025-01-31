@@ -7,6 +7,7 @@ URLs include:
 import flask
 import insta485
 
+
 @insta485.app.route('/accounts/create/')
 def show_create():
     """Display create page."""

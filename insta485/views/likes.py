@@ -23,7 +23,6 @@ def update_likes():
     # Connect to database
     connection = insta485.model.get_db()
 
-
     cur = connection.execute("SELECT 1 FROM posts WHERE postid = ?", (postid,))
     if cur.fetchone() is None:
         flask.abort(404)
@@ -35,7 +34,6 @@ def update_likes():
         )
         if cur.fetchone():
             flask.abort(409)
-
 
         connection.execute(
             "INSERT INTO likes (owner, postid) VALUES (?, ?)",
@@ -50,14 +48,13 @@ def update_likes():
         if cur.fetchone() is None:
             flask.abort(409)
 
-
         connection.execute(
             "DELETE FROM likes WHERE postid = ? AND owner = ?",
             (postid, logname),
         )
 
     else:
-        flask.abort(400) 
+        flask.abort(400)
 
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.redirect(target_url)

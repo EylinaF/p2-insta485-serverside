@@ -3,10 +3,11 @@ import flask
 import insta485
 import arrow
 
+
 @insta485.app.route('/posts/<postid_url_slug>/')
 def show_post(postid_url_slug):
     """Serve uploaded files only to authenticated users."""
-    
+
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
 
@@ -15,7 +16,11 @@ def show_post(postid_url_slug):
     connection = insta485.model.get_db()
     cur = connection.execute(
         """
-        SELECT posts.postid, posts.filename AS img_url, posts.created AS timestamp, users.username, users.filename AS owner_img_url
+        SELECT posts.postid,
+                posts.filename AS img_url,
+                posts.created AS timestamp,
+                users.username,
+                users.filename AS owner_img_url
         FROM posts
         JOIN users ON posts.owner = users.username
         WHERE posts.postid = ?
@@ -28,12 +33,18 @@ def show_post(postid_url_slug):
         flask.abort(404)
 
     cur = connection.execute(
-        "SELECT COUNT(*) AS like_count FROM likes WHERE postid = ?", (post["postid"],)
+        """
+        SELECT COUNT(*) AS like_count FROM likes WHERE postid = ?
+        """,
+        (post["postid"],)
     )
     post["likes"] = cur.fetchone()["like_count"]
 
     cur = connection.execute(
-        "SELECT 1 FROM likes WHERE postid = ? AND owner = ?", (post["postid"], logname)
+        """
+        SELECT 1 FROM likes WHERE postid = ? AND owner = ?
+        """,
+        (post["postid"], logname)
     )
     post["liked_by_user"] = cur.fetchone() is not None
 
@@ -53,7 +64,6 @@ def show_post(postid_url_slug):
     post["owner_img_url"] = f"/uploads/{post['owner_img_url']}"
     post["timestamp"] = arrow.get(post["timestamp"]).humanize()
 
-
     context = {
         "logname": logname,
         "postid": post["postid"],
@@ -65,5 +75,5 @@ def show_post(postid_url_slug):
         "liked_by_user": post["liked_by_user"],
         "comments": post["comments"]
     }
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.render_template("post.html", **context)

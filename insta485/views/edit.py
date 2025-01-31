@@ -7,6 +7,7 @@ URLs include:
 import flask
 import insta485
 
+
 @insta485.app.route('/accounts/edit/')
 def show_edit():
     """Display edit page."""
@@ -30,5 +31,5 @@ def show_edit():
         "username": logname,
         "profilepic": user["filename"],
     }
-    insta485.model.close_db(error = None)
+    insta485.model.close_db(error=None)
     return flask.render_template("create.html", **context)

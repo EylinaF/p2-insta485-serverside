@@ -7,16 +7,16 @@ URLs include:
 import flask
 import insta485
 LOGGER = flask.logging.create_logger(insta485.app)
+
+
 @insta485.app.route('/comments/', methods=["POST"])
 def handle_comments():
     """Update comments"""
-    
 
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
-    
-    logname = flask.session['username']
 
+    logname = flask.session['username']
 
     connection = insta485.model.get_db()
 
@@ -33,26 +33,25 @@ def handle_comments():
     if operation == "create":
         if not text:
             flask.abort(400)
-        
+
         connection.execute(
-        "INSERT INTO comments (commentid, owner, postid, text) VALUES (?, ?, ?, ?)",
-        (commentid, logname, postid, text)
+            """
+            INSERT INTO comments (commentid, owner, postid, text)
+            VALUES (?, ?, ?, ?)
+            """,
+            (commentid, logname, postid, text)
         )
     elif operation == "delete":
         cur = connection.execute(
-        "SELECT owner FROM comments WHERE commentid = ?", (commentid,)
+            "SELECT owner FROM comments WHERE commentid = ?", (commentid,)
         )
         owner = cur.fetchone()
 
-        
         if owner["owner"] != logname:
             flask.abort(403)
-        
-        
-        
-        connection.execute("DELETE FROM comments WHERE commentid = ?", (commentid,))
-    insta485.model.close_db(error = None)
+
+        connection.execute(
+            "DELETE FROM comments WHERE commentid = ?", (commentid,)
+            )
+    insta485.model.close_db(error=None)
     return flask.redirect(target)
-
-
-    
