@@ -49,7 +49,7 @@
             <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
             <form action="/comments/?target={{ request.path }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="operation" value="delete"/>
-                <input type="hidden" name="commentid" value="{{ commentid }}"/>
+                <input type="hidden" name="commentid" value="{{ comment.commentid }}"/>
                 <input type="submit" name="uncomment" value="delete"/>
             </form>
             {% endif  %}
