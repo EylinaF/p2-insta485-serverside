@@ -24,14 +24,21 @@
     </header>
     <div>
         <h2>Discover People</h2>
-        {% for not_follow in not_following %}
+        {% for notfollow in expo_users %}
         <div class="insta">
             <div class="left">
-                <a href="/users/{{not_follow.username}}/">
-                    <img class="profile" src="{{not_follow.user_img_url}}"
-                        alt="{{not_follow.username}} profile picture">
-                    <b>{{not_follow.username}}</b>
+                <a href="/users/{{notfollow.username}}/">
+                    <img class="profile" src="{{notfollow.user_img_url}}"
+                        alt="{{notfollow.username}} profile picture">
+                    <b>{{notfollow.username}}</b>
                 </a>
+                <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+                <form action="/following/?target={{request.path}}" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="follow" value="follow" />
+                    <input type="hidden" name="username" value="{{notfollow.username}}" />
+                    <input type="hidden" name="operation" value="follow" />
+                </form>
+  
             </div>
         </div>
         {% endfor %}

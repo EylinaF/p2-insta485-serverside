@@ -2,13 +2,13 @@
 Insta485 index (main) view.
 
 URLs include:
-/users/<user_url_slug>/explore/
+/explore/
 """
 import flask
 import insta485
 
-@insta485.app.route('/users/<user_url_slug>/explore/')
-def show_explore(user_url_slug):
+@insta485.app.route('/explore/')
+def show_explore():
     """Display user following page."""
 
     """
@@ -21,12 +21,7 @@ def show_explore(user_url_slug):
 
     # Connect to database
     connection = insta485.model.get_db()
-
-    cur = connection.execute(
-        "SELECT username FROM users WHERE username = ?",
-        (user_url_slug,)
-    )
-    user = cur.fetchone()
+    user = logname
 
     if user is None:
         flask.abort(404)
@@ -34,27 +29,23 @@ def show_explore(user_url_slug):
     cur = connection.execute(
         """
         SELECT users.username, users.filename AS user_img_url
-        FROM following
-        JOIN users ON following.username1 = users.username
-        WHERE following.username2 = ?
-        """,
-        (user_url_slug,)
-    )
-    followers = cur.fetchall()
-
-    for follower in followers:
-        follower["user_img_url"] = f"/uploads/{follower['user_img_url']}"
-
-        cur = connection.execute(
-        "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
-        (logname, follower["username"])
+        FROM users
+        WHERE username != ?
+        AND username NOT IN (
+            SELECT username2 FROM following WHERE username1 = ?
         )
-        follower["logname_follows_username"] = cur.fetchone() is not None
+        """,
+        (logname, logname)
+    )
+    expo_users = cur.fetchall()
+
+    for expo_user in expo_users:
+        expo_user["user_img_url"] = f"/uploads/{expo_user['user_img_url']}"
+        expo_user["profile_url"] = f"/users/{expo_user['username']}/"
 
     context = {
         "logname": logname,
-        "username": user_url_slug,
-        "followers": followers,
+        "expo_users": expo_users,
     }
 
-    return flask.render_template("followers.html", **context)
+    return flask.render_template("explore.html", **context)
