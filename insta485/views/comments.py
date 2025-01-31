@@ -44,10 +44,10 @@ def handle_comments():
         )
         owner = cur.fetchone()
 
-        """
-        if owner != logname:
+        
+        if owner["owner"] != logname:
             flask.abort(403)
-        """
+        
         
         
         connection.execute("DELETE FROM comments WHERE commentid = ?", (commentid,))
