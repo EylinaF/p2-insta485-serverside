@@ -15,5 +15,7 @@ def show_delete():
         return flask.redirect("/accounts/login/")
 
     logname = flask.session['username']
-    
-    return flask.render_template("delete.html")
+    context = {
+        "logname" = logname
+    }
+    return flask.render_template("delete.html", **context)

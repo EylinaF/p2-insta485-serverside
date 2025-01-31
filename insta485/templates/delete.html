@@ -24,18 +24,12 @@
     <main>
         <!-- DO NOT CHANGE THIS (aside from styling) -->
       <!-- DO NOT CHANGE THIS (aside from styling) -->
-        <form action="<FIXME_ACCOUNTS_URL_HERE>?target=<FIXME_INDEX_URL_HERE>" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" required/>
-            <input type="text" name="fullname" required/>
-            <input type="text" name="username" required/>
-            <input type="text" name="email" required/>
-            <input type="password" name="password" required/>
-            <input type="submit" name="signup" value="sign up"/>
-            <input type="hidden" name="operation" value="create"/>
-        </form>
-  
-  
-        <p>Have an account? <a href="/accounts/login/">Log in</a></p>
+       <b>{{ logname }}</b>
+       <form action="account?target={{ request.path }}" method="post" enctype="multipart/form-data">
+        <input type="submit" name="delete" value="confirm delete account"/>
+        <input type="hidden" name="operation" value="delete"/>
+      </form>
+
     </main>
 </body>
 
