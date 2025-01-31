@@ -64,6 +64,9 @@
         </p>
 
         <p>{{fullname}}</p>
+        {% if total_posts == 0 %}
+            No posts yet.
+        {% endif %}
         {% if logname == username %}
         <form action="/posts/?target={{request.path}}" method="post" enctype="multipart/form-data">
             <input type="file" name="file" accept="image/*" required />
