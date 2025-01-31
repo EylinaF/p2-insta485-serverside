@@ -11,4 +11,7 @@ import insta485
 def show_delete():
     """Display delete page."""
 
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('/accounts/login/'))
+
     return flask.render_template("delete.html")

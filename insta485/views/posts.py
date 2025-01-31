@@ -8,7 +8,7 @@ def show_post(postid_url_slug):
     """Serve uploaded files only to authenticated users."""
     
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('/accounts/login/'))
 
     logname = flask.session['username']
 

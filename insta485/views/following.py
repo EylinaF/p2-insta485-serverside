@@ -11,9 +11,8 @@ import insta485
 def show_following(user_url_slug):
     """Display user following page."""
 
-
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('/accounts/login/'))
 
     logname = flask.session['username']
 

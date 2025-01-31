@@ -2,14 +2,14 @@
 Insta485 index (main) view.
 
 URLs include:
-/logout/?target=URL
+/accounts/logout/?target=URL
 """
 import flask
 import insta485
 
 LOGGER = flask.logging.create_logger(insta485.app)
 
-@insta485.app.route('/logout/', methods=["POST"])
+@insta485.app.route('/accounts/logout/', methods=["POST"])
 def log_out():
    
     """

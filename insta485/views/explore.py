@@ -13,7 +13,7 @@ def show_explore():
 
     
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('/accounts/login/'))
 
     logname = flask.session['username']
     

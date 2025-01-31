@@ -12,7 +12,7 @@ LOGGER = flask.logging.create_logger(insta485.app)
 def manage_posts():
     """Handle creating and deleting posts."""
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('/accounts/login/'))
 
     logname = flask.session['username']
 

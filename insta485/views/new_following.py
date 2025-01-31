@@ -7,12 +7,14 @@ URLs include:
 import flask
 import insta485
 
+LOGGER = flask.logging.create_logger(insta485.app)
+
 @insta485.app.route('/following/', methods=["POST"])
 def handle_following():
     """Update following"""
 
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
+        return flask.redirect(flask.url_for('/accounts/login/'))
 
     logname = flask.session['username']
 
