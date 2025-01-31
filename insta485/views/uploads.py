@@ -8,15 +8,12 @@ def get_uploaded_file(filename):
     
 
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('login'))
-
-    logname = flask.session['username']
+        flask.abort(403)
 
 
     upload_folder = os.path.join(insta485.app.config["UPLOAD_FOLDER"], filename)
 
     if not os.path.exists(upload_folder):
-        flask.abort(404)  
-
+        flask.abort(404)
 
     return flask.send_from_directory(insta485.app.config["UPLOAD_FOLDER"], filename)
