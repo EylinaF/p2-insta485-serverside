@@ -30,6 +30,7 @@ def handle_following():
             "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
             (logname, username)
         )
+
         if cur.fetchone():
             flask.abort(409)
 
@@ -38,12 +39,13 @@ def handle_following():
         (logname, username)
         )
     elif operation == "unfollow":
-       cur = connection.execute(
+        cur = connection.execute(
             "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
             (logname, username)
         )
         if not cur.fetchone():
             flask.abort(409)
+
         connection.execute(
             "DELETE FROM following WHERE username1 = ? AND username2 = ?",
             (logname, username)
