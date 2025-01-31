@@ -12,6 +12,9 @@ LOGGER = flask.logging.create_logger(insta485.app)
 def manage_posts():
     """Handle creating and deleting posts."""
     #logname = flask.session.get("username")
+
+
+    
     logname = "awdeorio"
     if not logname:
         flask.abort(403)  # User must be logged in
