@@ -53,5 +53,5 @@ def show_following(user_url_slug):
         "username": user_url_slug,
         "following": following,
     }
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.render_template("following.html", **context)

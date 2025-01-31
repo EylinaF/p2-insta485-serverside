@@ -59,5 +59,5 @@ def update_likes():
     else:
         flask.abort(400) 
 
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.redirect(target_url)

@@ -65,5 +65,5 @@ def show_post(postid_url_slug):
         "liked_by_user": post["liked_by_user"],
         "comments": post["comments"]
     }
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.render_template("post.html", **context)

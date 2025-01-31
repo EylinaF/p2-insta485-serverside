@@ -69,5 +69,5 @@ def show_index():
         "logname": logname,
         "posts": posts,
     }
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.render_template("index.html", **context)

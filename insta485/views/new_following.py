@@ -51,5 +51,5 @@ def handle_following():
             "DELETE FROM following WHERE username1 = ? AND username2 = ?",
             (logname, username)
         )
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.redirect(target)

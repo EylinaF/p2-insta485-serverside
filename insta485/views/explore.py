@@ -46,5 +46,5 @@ def show_explore():
         "logname": logname,
         "expo_users": expo_users,
     }
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.render_template("explore.html", **context)

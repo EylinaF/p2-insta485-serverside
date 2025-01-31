@@ -80,5 +80,5 @@ def show_user_profile(user_url_slug):
         "total_posts" : total_posts,
         "posts": posts,
     }
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.render_template("user.html", **context)

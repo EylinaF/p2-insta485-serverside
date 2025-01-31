@@ -51,7 +51,7 @@ def handle_comments():
         
         
         connection.execute("DELETE FROM comments WHERE commentid = ?", (commentid,))
-    insta485.model.close_db()
+    insta485.model.close_db(error = None)
     return flask.redirect(target)
 
 
