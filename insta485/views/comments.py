@@ -11,14 +11,12 @@ import insta485
 def handle_comments():
     """Update comments"""
     
-    """
+
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
 
     logname = flask.session['username']
-    """
 
-    logname = "awdeorio"
 
     connection = insta485.model.get_db()
 

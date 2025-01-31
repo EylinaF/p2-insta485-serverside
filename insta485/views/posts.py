@@ -7,8 +7,10 @@ import arrow
 def show_post(postid_url_slug):
     """Serve uploaded files only to authenticated users."""
     
-    logname = "awdeorio"
-    #logname = flask.session.get("username")
+    if 'username' not in flask.session:
+        return flask.redirect(flask.url_for('login'))
+
+    logname = flask.session['username']
 
     connection = insta485.model.get_db()
     cur = connection.execute(
@@ -22,7 +24,6 @@ def show_post(postid_url_slug):
     )
     post = cur.fetchone()
 
-    # If post doesn't exist, return 404
     if post is None:
         flask.abort(404)
 
@@ -52,7 +53,7 @@ def show_post(postid_url_slug):
     post["owner_img_url"] = f"/uploads/{post['owner_img_url']}"
     post["timestamp"] = arrow.get(post["timestamp"]).humanize()
 
-    # Prepare context
+
     context = {
         "logname": logname,
         "postid": post["postid"],

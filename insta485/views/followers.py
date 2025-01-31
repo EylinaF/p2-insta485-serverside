@@ -11,13 +11,11 @@ import insta485
 def show_followers(user_url_slug):
     """Display user following page."""
 
-    """
+
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
 
     logname = flask.session['username']
-    """
-    logname = "awdeorio"
 
     # Connect to database
     connection = insta485.model.get_db()
