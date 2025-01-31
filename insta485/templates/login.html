@@ -19,7 +19,7 @@
         </div>
     </header>
     <main>
-        <form action="<FIXME_ACCOUNTS_URL_HERE>?target=<FIXME_INDEX_URL_HERE>" method="post"
+        <form action="account?target={{ request.path }}" method="post"
             enctype="multipart/form-data">
             <input type="text" name="username" required />
             <input type="password" name="password" required />
