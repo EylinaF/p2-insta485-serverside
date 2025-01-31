@@ -105,8 +105,18 @@ def handle_account():
         if os.path.exists(file_path):
             os.remove(file_path)
 
+        cur = connection.execute("SELECT filename FROM posts WHERE owner = ?", (logname,))
+        post_images = cur.fetchall()
+
+        # Delete each image file
+        for img in post_images:
+            file_path = os.path.join(insta485.app.config["UPLOAD_FOLDER"], img["filename"])
+            if os.path.exists(file_path):
+                os.remove(file_path)
+
         connection.execute("DELETE FROM likes WHERE owner = ?", (logname,))
         connection.execute("DELETE FROM comments WHERE owner = ?", (logname,))
+        connection.execute("DELETE FROM following WHERE username1 = ? or username2 = ?", (logname, logname))
         connection.execute("DELETE FROM posts WHERE owner = ?", (logname,))
         connection.execute("DELETE FROM users WHERE username = ?", (logname,))
 
