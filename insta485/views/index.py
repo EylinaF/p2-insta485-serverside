@@ -13,13 +13,12 @@ import arrow
 def show_index():
     """Display / route."""
 
-    """
+
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
 
     logname = flask.session['username']
-    """
-    logname = "awdeorio"
+
 
     # Connect to database
     connection = insta485.model.get_db()

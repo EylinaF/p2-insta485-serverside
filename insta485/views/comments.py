@@ -11,14 +11,12 @@ import insta485
 def handle_comments():
     """Update comments"""
     
-    """
+
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
 
     logname = flask.session['username']
-    """
 
-    logname = "awdeorio"
 
     connection = insta485.model.get_db()
 
@@ -27,6 +25,10 @@ def handle_comments():
     postid = flask.request.form.get("postid")
     commentid = flask.request.form.get("commentid")
     text = flask.request.form.get("text", "").strip()
+    LOGGER.debug("operation = %s", operation)
+    LOGGER.debug("postid = %s", postid)
+    LOGGER.debug("commentid = %s", commentid)
+    LOGGER.debug("text = %s", text)
 
     if operation == "create":
         if not text:

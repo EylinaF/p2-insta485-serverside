@@ -10,21 +10,20 @@ import insta485
 @insta485.app.route('/following/', methods=["POST"])
 def handle_following():
     """Update following"""
-    
-    """
+
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
 
     logname = flask.session['username']
-    """
 
-    logname = "awdeorio"
 
     connection = insta485.model.get_db()
 
     operation = flask.request.form.get("operation")
     target = flask.request.args.get("target", "/")
     username = flask.request.form.get("username")
+    LOGGER.debug("operation = %s", operation)
+    LOGGER.debug("username = %s", username)
     if operation == "follow":
         cur = connection.execute(
             "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
