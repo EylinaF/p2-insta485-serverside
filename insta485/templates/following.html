@@ -35,7 +35,7 @@
             <p>{% if logname != follow.username %}
                 {% if follow.logname_follows_username %}
                 following
-            <form action="/following/?target={{request.path}}>" method="post" enctype="multipart/form-data">
+            <form action="/following/?target={{request.path}}" method="post" enctype="multipart/form-data">
                 <input type="submit" name="unfollow" value="unfollow" />
                 <input type="hidden" name="username" value="{{follow.username}}" />
                 <input type="hidden" name="operation" value="unfollow" />
