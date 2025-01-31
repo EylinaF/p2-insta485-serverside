@@ -22,7 +22,7 @@ def show_edit():
         (logname,)
     )
 
-    user = cur.fetchone
+    user = cur.fetchone()
 
     context = {
         "email": user["email"],
