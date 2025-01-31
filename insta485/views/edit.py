@@ -7,11 +7,17 @@ URLs include:
 import flask
 import insta485
 
-@insta485.app.route('/accounts/create/')
-def show_create():
-    """Display create page."""
+@insta485.app.route('/accounts/edit/')
+def show_edit():
+    """Display edit page."""
+    
+    connection = insta485.model.get_db()
 
-    if "username" in flask.session:
-        return flask.redirect(flask.url_for("show_edit"))
+    context = {
+        "email": email,
+        "fullname": fullname,
+        "username": user_url_slug,
+        "profilepic": profilepic,
+    }
 
     return flask.render_template("create.html")

@@ -10,7 +10,11 @@ from insta485.views.login import show_login
 from insta485.views.create import show_create
 from insta485.views.delete import show_delete
 from insta485.views.edit import show_edit
+from insta485.views.auth import check_auth
 from insta485.views.password import show_password
 from insta485.views.likes import update_likes
 from insta485.views.comments import handle_comments
 from insta485.views.posts_change import manage_posts
+from insta485.views.log_out import log_out
+from insta485.views.new_account import handle_account
+from insta485.views.new_following import handle_following
