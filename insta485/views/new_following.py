@@ -10,15 +10,12 @@ import insta485
 @insta485.app.route('/following/', methods=["POST"])
 def handle_following():
     """Update following"""
-    
-    """
+
     if 'username' not in flask.session:
         return flask.redirect(flask.url_for('login'))
 
     logname = flask.session['username']
-    """
 
-    logname = "awdeorio"
 
     connection = insta485.model.get_db()
 
