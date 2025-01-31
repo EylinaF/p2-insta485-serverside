@@ -6,7 +6,7 @@ URLs include:
 """
 import flask
 import insta485
-
+LOGGER = flask.logging.create_logger(insta485.app)
 @insta485.app.route('/users/<user_url_slug>/following/')
 def show_following(user_url_slug):
     """Display user following page."""

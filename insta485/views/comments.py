@@ -6,7 +6,7 @@ URLs include:
 """
 import flask
 import insta485
-
+LOGGER = flask.logging.create_logger(insta485.app)
 @insta485.app.route('/comments/', methods=["POST"])
 def handle_comments():
     """Update comments"""
