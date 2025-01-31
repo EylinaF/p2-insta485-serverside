@@ -13,7 +13,7 @@ def handle_comments():
     
 
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('/accounts/login/'))
+        return flask.redirect("/accounts/login/")
     
     logname = flask.session['username']
 

@@ -12,7 +12,7 @@ def show_following(user_url_slug):
     """Display user following page."""
 
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('/accounts/login/'))
+        return flask.redirect("/accounts/login/")
 
     logname = flask.session['username']
 

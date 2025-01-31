@@ -11,21 +11,24 @@ import insta485
 def show_edit():
     """Display edit page."""
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('/accounts/login/'))
+        return flask.redirect("/accounts/login/")
 
     logname = flask.session['username']
 
     connection = insta485.model.get_db()
 
     cur = connection.execute(
-        "SELECT email, fullname, p FROM users WHERE username = ?",
+        "SELECT email, fullname, filename FROM users WHERE username = ?",
         (logname,)
     )
+
+    user = cur.fetchone
+
     context = {
-        "email": email,
-        "fullname": fullname,
-        "username": user_url_slug,
-        "profilepic": profilepic,
+        "email": user["email"],
+        "fullname": user["fullname"],
+        "username": logname,
+        "profilepic": user["filename"],
     }
 
     return flask.render_template("create.html", **context)

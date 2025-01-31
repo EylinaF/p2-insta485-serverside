@@ -9,7 +9,7 @@ LOGGER = flask.logging.create_logger(insta485.app)
 def update_likes():
     """Handle liking and unliking a post."""
     if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('/accounts/login/'))
+        return flask.redirect("/accounts/login/")
 
     logname = flask.session['username']
 
