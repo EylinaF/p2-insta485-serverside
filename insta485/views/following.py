@@ -44,7 +44,7 @@ def show_following(user_url_slug):
         
         cur = connection.execute(
         "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
-        (follow["username"], logname)
+        (logname, follow["username"])
         )
         follow["logname_follows_username"] = cur.fetchone() is not None
 
