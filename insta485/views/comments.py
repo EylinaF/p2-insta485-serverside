@@ -42,7 +42,7 @@ def handle_comments():
         cur = connection.execute(
         "SELECT owner FROM comments WHERE commentid = ?", (commentid,)
         )
-        owner = cur.fetchone
+        owner = cur.fetchone()
 
         """
         if owner != logname:

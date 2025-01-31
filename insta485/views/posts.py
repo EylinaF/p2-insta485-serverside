@@ -39,7 +39,7 @@ def show_post(postid_url_slug):
 
     cur = connection.execute(
         """
-        SELECT users.username AS owner, comments.text
+        SELECT users.username AS owner, comments.text, comments.commentid
         FROM comments
         JOIN users ON comments.owner = users.username
         WHERE comments.postid = ?
