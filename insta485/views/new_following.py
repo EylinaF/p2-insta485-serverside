@@ -22,6 +22,8 @@ def handle_following():
     operation = flask.request.form.get("operation")
     target = flask.request.args.get("target", "/")
     username = flask.request.form.get("username")
+    LOGGER.debug("operation = %s", operation)
+    LOGGER.debug("username = %s", username)
     if operation == "follow":
         cur = connection.execute(
             "SELECT 1 FROM following WHERE username1 = ? AND username2 = ?",
