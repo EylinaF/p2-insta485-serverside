@@ -54,5 +54,5 @@ def show_followers(user_url_slug):
         "username": user_url_slug,
         "followers": followers,
     }
-
+    insta485.model.close_db()
     return flask.render_template("followers.html", **context)

@@ -18,4 +18,5 @@ def show_delete():
     context = {
         "logname": logname
     }
+
     return flask.render_template("delete.html", **context)

@@ -79,5 +79,5 @@ def manage_posts():
 
     else:
         flask.abort(400)
-
+    insta485.model.close_db()
     return flask.redirect(target_url)

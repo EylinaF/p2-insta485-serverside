@@ -202,5 +202,5 @@ def handle_account():
         )
 
         LOGGER.debug("User %s updated their password.", username)
-
+    insta485.model.close_db()
     return flask.redirect(target_url)
