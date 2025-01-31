@@ -1,3 +1,8 @@
+"""
+Uploads.
+
+URL is.
+"""
 import os
 import flask
 import insta485
@@ -6,7 +11,6 @@ import insta485
 @insta485.app.route('/uploads/<filename>')
 def get_uploaded_file(filename):
     """Serve uploaded files only to authenticated users."""
-
     if 'username' not in flask.session:
         flask.abort(403)
 

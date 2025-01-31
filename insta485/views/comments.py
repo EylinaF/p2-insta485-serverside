@@ -11,8 +11,7 @@ LOGGER = flask.logging.create_logger(insta485.app)
 
 @insta485.app.route('/comments/', methods=["POST"])
 def handle_comments():
-    """Update comments"""
-
+    """Update comments."""
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
 

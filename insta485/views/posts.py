@@ -1,3 +1,8 @@
+"""
+Posts.
+
+URL is.
+"""
 import os
 import flask
 import insta485
@@ -7,7 +12,6 @@ import arrow
 @insta485.app.route('/posts/<postid_url_slug>/')
 def show_post(postid_url_slug):
     """Serve uploaded files only to authenticated users."""
-
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
 

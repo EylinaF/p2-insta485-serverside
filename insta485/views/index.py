@@ -12,7 +12,6 @@ import arrow
 @insta485.app.route('/')
 def show_index():
     """Display / route."""
-
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
 

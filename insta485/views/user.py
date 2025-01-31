@@ -11,7 +11,6 @@ import insta485
 @insta485.app.route('/users/<user_url_slug>/')
 def show_user_profile(user_url_slug):
     """Display user profile page."""
-
     if 'username' not in flask.session:
         return flask.redirect("/accounts/login/")
 
