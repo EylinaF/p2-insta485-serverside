@@ -7,6 +7,10 @@ from insta485.views.following import show_following
 from insta485.views.posts import show_post
 from insta485.views.explore import show_explore
 from insta485.views.login import show_login
+from insta485.views.create import show_create
+from insta485.views.delete import show_delete
+from insta485.views.edit import show_edit
+from insta485.views.password import show_password
 from insta485.views.likes import update_likes
 from insta485.views.comments import handle_comments
 from insta485.views.posts_change import manage_posts

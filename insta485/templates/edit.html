@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>insta485</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="insta">
+            <div class="left">
+                <a href="/" class="logo">
+                    <img src="/static/images/logo.png" alt="logo">
+                </a>
+                <h2><a href="/" class="logo">Insta485</a></h2>
+            </div>
+        </div>
+    </header>
+    <main>
+        
+        <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+        <form action="<FIXME_ACCOUNTS_URL_HERE>?target=<FIXME_CURRENT_URL_HERE>" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*"/>
+            <input type="text" name="fullname" value="<FIXME_FULL_NAME_HERE>" required/>
+            <input type="text" name="email" value="<FIXME_EMAIL_HERE>" required/>
+            <input type="submit" name="update" value="submit"/>
+            <input type="hidden" name="operation" value="edit_account"/>
+        </form>
+  
+        <p><a href="/accounts/password/">Change password</a></p>
+        <p><a href="/accounts/delete/">Delete account</a></p>
+    </main>
+</body>
+
+</html>

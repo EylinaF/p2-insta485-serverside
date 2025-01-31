@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>insta485</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="insta">
+            <div class="left">
+                <a href="/" class="logo">
+                    <img src="/static/images/logo.png" alt="logo">
+                </a>
+                <h2><a href="/" class="logo">Insta485</a></h2>
+            </div>
+            <div class = "right">
+                <a href = "/accounts/login/">Login</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- DO NOT CHANGE THIS (aside from styling) -->
+      <!-- DO NOT CHANGE THIS (aside from styling) -->
+        <form action="<FIXME_ACCOUNTS_URL_HERE>?target=<FIXME_INDEX_URL_HERE>" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required/>
+            <input type="text" name="fullname" required/>
+            <input type="text" name="username" required/>
+            <input type="text" name="email" required/>
+            <input type="password" name="password" required/>
+            <input type="submit" name="signup" value="sign up"/>
+            <input type="hidden" name="operation" value="create"/>
+        </form>
+  
+  
+        <p>Have an account? <a href="/accounts/login/">Log in</a></p>
+    </main>
+</body>
+
+</html>
