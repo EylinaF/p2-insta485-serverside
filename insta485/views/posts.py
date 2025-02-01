@@ -3,10 +3,9 @@ Posts.
 
 URL is.
 """
-import os
 import flask
-import insta485
 import arrow
+import insta485
 
 
 @insta485.app.route('/posts/<postid_url_slug>/')

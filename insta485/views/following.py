@@ -1,5 +1,5 @@
 """
-Insta485 index (main) view.
+Insta485 following (main) view.
 
 URLs include:
 /users/<user_url_slug>/following/
