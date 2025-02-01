@@ -6,15 +6,16 @@ URLs include:
 """
 import flask
 import insta485
+from insta485.views.helpers import get_logged_in_user, NotLoggedIn
 
 
 @insta485.app.route('/accounts/edit/')
 def show_edit():
     """Display edit page."""
-    if 'username' not in flask.session:
+    try:
+        logname = get_logged_in_user()
+    except NotLoggedIn:
         return flask.redirect("/accounts/login/")
-
-    logname = flask.session['username']
 
     connection = insta485.model.get_db()
 

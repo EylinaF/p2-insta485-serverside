@@ -6,15 +6,16 @@ URL is.
 import flask
 import arrow
 import insta485
+from insta485.views.helpers import get_logged_in_user, NotLoggedIn
 
 
 @insta485.app.route('/posts/<postid_url_slug>/')
 def show_post(postid_url_slug):
     """Serve uploaded files only to authenticated users."""
-    if 'username' not in flask.session:
+    try:
+        logname = get_logged_in_user()
+    except NotLoggedIn:
         return flask.redirect("/accounts/login/")
-
-    logname = flask.session['username']
 
     connection = insta485.model.get_db()
     cur = connection.execute(

@@ -6,39 +6,23 @@ URLs include:
 """
 import flask
 import insta485
+from insta485.views.helpers import get_follow_data
+from insta485.views.helpers import get_logged_in_user, NotLoggedIn
+
 LOGGER = flask.logging.create_logger(insta485.app)
 
 
 @insta485.app.route('/users/<user_url_slug>/followers/')
 def show_followers(user_url_slug):
     """Display user following page."""
-    if 'username' not in flask.session:
+    try:
+        logname = get_logged_in_user()
+    except NotLoggedIn:
         return flask.redirect("/accounts/login/")
-
-    logname = flask.session['username']
-
     # Connect to database
     connection = insta485.model.get_db()
 
-    cur = connection.execute(
-        "SELECT username FROM users WHERE username = ?",
-        (user_url_slug,)
-    )
-    user = cur.fetchone()
-
-    if user is None:
-        flask.abort(404)
-
-    cur = connection.execute(
-        """
-        SELECT users.username, users.filename AS user_img_url
-        FROM following
-        JOIN users ON following.username1 = users.username
-        WHERE following.username2 = ?
-        """,
-        (user_url_slug,)
-    )
-    followers = cur.fetchall()
+    followers = get_follow_data(user_url_slug, "followers")
 
     for follower in followers:
         follower["user_img_url"] = f"/uploads/{follower['user_img_url']}"

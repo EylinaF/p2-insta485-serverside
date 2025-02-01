@@ -7,15 +7,16 @@ URLs include:
 import flask
 import arrow
 import insta485
+from insta485.views.helpers import get_logged_in_user, NotLoggedIn
 
 
 @insta485.app.route('/')
 def show_index():
     """Display / route."""
-    if 'username' not in flask.session:
+    try:
+        logname = get_logged_in_user()
+    except NotLoggedIn:
         return flask.redirect("/accounts/login/")
-
-    logname = flask.session['username']
 
     # Connect to database
     connection = insta485.model.get_db()
