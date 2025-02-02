@@ -23,7 +23,7 @@ def show_edit():
     )
 
     user = cur.fetchone()
-
+    user["filename"] = f"/uploads/{user["filename"]}"
     context = {
         "email": user["email"],
         "fullname": user["fullname"],
