@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+#Write another script called bin/insta485test:
+set -Eeuo pipefail
+set -x
+
+#Stop on errors and prints commands
+
+#Run pycodestyle insta485
+#Run pydocstyle insta485
+#Run pylint insta485
+pycodestyle insta485
+pydocstyle insta485
+pylint insta485
+#Run all unit tests using pytest -v tests
+pytest -v tests/app_tests
