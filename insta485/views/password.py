@@ -11,4 +11,4 @@ import insta485
 @insta485.app.route('/accounts/password/')
 def show_password():
     """Display password page."""
-    return flask.render_template("delete.html")
+    return flask.render_template("password.html")

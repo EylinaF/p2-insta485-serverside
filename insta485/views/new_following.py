@@ -14,7 +14,6 @@ LOGGER = flask.logging.create_logger(insta485.app)
 @insta485.app.route('/following/', methods=["POST"])
 def handle_following():
     """Update following."""
-
     try:
         logname = get_logged_in_user()
     except NotLoggedIn:

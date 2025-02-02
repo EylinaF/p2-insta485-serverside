@@ -5,13 +5,16 @@ import insta485
 
 class NotLoggedIn(Exception):
     """Custom exception for unauthenticated access."""
+
     pass
+
 
 def get_logged_in_user():
     """Check if user is logged in and return the username."""
     if 'username' not in flask.session:
         raise NotLoggedIn  # Raise an exception instead of returning a Response
     return flask.session['username']
+
 
 def get_follow_data(user_url_slug, relationship):
     """Retrieve the list of users."""

@@ -33,4 +33,4 @@ def show_edit():
         "profilepic": user["filename"],
     }
     insta485.model.close_db(error=None)
-    return flask.render_template("create.html", **context)
+    return flask.render_template("edit.html", **context)
