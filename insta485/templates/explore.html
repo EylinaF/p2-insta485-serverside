@@ -33,7 +33,7 @@
                     <b>{{notfollow.username}}</b>
                 </a>
                 <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
-                <form action="/following/?target={{request.path}}" method="post" enctype="multipart/form-data">
+                <form action="/following/?target=/explore/" method="post" enctype="multipart/form-data">
                     <input type="submit" name="follow" value="follow" />
                     <input type="hidden" name="username" value="{{notfollow.username}}" />
                     <input type="hidden" name="operation" value="follow" />
