@@ -78,7 +78,6 @@ def operation_create(connection):
     fullname = flask.request.form.get("fullname")
     email = flask.request.form.get("email")
     fileobj = flask.request.files.get("file")
-    target = flask.request.args.get("target", "/")
     if (
         not username
         or not password
@@ -122,7 +121,7 @@ def operation_create(connection):
 
     flask.session["username"] = username
     LOGGER.debug("New user created: %s", username)
-    return flask.redirect(target)
+
 
 def operation_delete(connection):
     """Delete."""
