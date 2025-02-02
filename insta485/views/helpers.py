@@ -3,9 +3,11 @@ from functools import wraps
 import flask
 import insta485
 
+
 def login_required_redirect(view_func):
     """
-    Decorator that checks if 'username' is in flask.session.
+    Decorate that checks if 'username' is in flask.session.
+
     - If not, redirect to /accounts/login/.
     - Otherwise, call the wrapped view function.
     """
@@ -15,6 +17,7 @@ def login_required_redirect(view_func):
             return flask.redirect("/accounts/login/")
         return view_func(*args, **kwargs)
     return wrapped_view
+
 
 def get_follow_data(user_url_slug, relationship):
     """Retrieve the list of users."""
