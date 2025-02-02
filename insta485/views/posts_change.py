@@ -4,18 +4,16 @@ import pathlib
 import uuid
 import flask
 import insta485
-from insta485.views.helpers import get_logged_in_user, NotLoggedIn
+from insta485.views.helpers import login_required_redirect
 
 LOGGER = flask.logging.create_logger(insta485.app)
 
 
 @insta485.app.route("/posts/", methods=["POST"])
+@login_required_redirect
 def manage_posts():
     """Handle creating and deleting posts."""
-    try:
-        logname = get_logged_in_user()
-    except NotLoggedIn:
-        return flask.redirect("/accounts/login/")
+    logname = flask.session["username"]
 
     operation = flask.request.form.get("operation")
     target_url = flask.request.args.get("target", f"/users/{logname}/")

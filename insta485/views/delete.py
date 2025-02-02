@@ -6,16 +6,14 @@ URLs include:
 """
 import flask
 import insta485
-from insta485.views.helpers import get_logged_in_user, NotLoggedIn
+from insta485.views.helpers import login_required_redirect
 
 
 @insta485.app.route('/accounts/delete/')
+@login_required_redirect
 def show_delete():
     """Display delete page."""
-    try:
-        logname = get_logged_in_user()
-    except NotLoggedIn:
-        return flask.redirect("/accounts/login/")
+    logname = flask.session["username"]
     context = {
         "logname": logname
     }

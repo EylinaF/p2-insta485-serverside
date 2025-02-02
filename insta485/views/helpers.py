@@ -1,20 +1,20 @@
 """This is helper."""
+from functools import wraps
 import flask
 import insta485
 
-
-class NotLoggedIn(Exception):
-    """Custom exception for unauthenticated access."""
-
-    pass
-
-
-def get_logged_in_user():
-    """Check if user is logged in and return the username."""
-    if 'username' not in flask.session:
-        raise NotLoggedIn  # Raise an exception instead of returning a Response
-    return flask.session['username']
-
+def login_required_redirect(view_func):
+    """
+    Decorator that checks if 'username' is in flask.session.
+    - If not, redirect to /accounts/login/.
+    - Otherwise, call the wrapped view function.
+    """
+    @wraps(view_func)
+    def wrapped_view(*args, **kwargs):
+        if "username" not in flask.session:
+            return flask.redirect("/accounts/login/")
+        return view_func(*args, **kwargs)
+    return wrapped_view
 
 def get_follow_data(user_url_slug, relationship):
     """Retrieve the list of users."""

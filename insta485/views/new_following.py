@@ -6,18 +6,16 @@ URLs include:
 """
 import flask
 import insta485
-from insta485.views.helpers import get_logged_in_user, NotLoggedIn
+from insta485.views.helpers import login_required_redirect
 
 LOGGER = flask.logging.create_logger(insta485.app)
 
 
 @insta485.app.route('/following/', methods=["POST"])
+@login_required_redirect
 def handle_following():
     """Update following."""
-    try:
-        logname = get_logged_in_user()
-    except NotLoggedIn:
-        return flask.redirect("/accounts/login/")
+    logname = flask.session["username"]
 
     connection = insta485.model.get_db()
 

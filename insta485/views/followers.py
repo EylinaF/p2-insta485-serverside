@@ -7,18 +7,16 @@ URLs include:
 import flask
 import insta485
 from insta485.views.helpers import get_follow_data
-from insta485.views.helpers import get_logged_in_user, NotLoggedIn
+from insta485.views.helpers import login_required_redirect
 
 LOGGER = flask.logging.create_logger(insta485.app)
 
 
 @insta485.app.route('/users/<user_url_slug>/followers/')
+@login_required_redirect
 def show_followers(user_url_slug):
     """Display user following page."""
-    try:
-        logname = get_logged_in_user()
-    except NotLoggedIn:
-        return flask.redirect("/accounts/login/")
+    logname = flask.session["username"]
     # Connect to database
     connection = insta485.model.get_db()
 
