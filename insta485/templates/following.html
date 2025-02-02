@@ -32,16 +32,16 @@
                     <b>{{follow.username}}</b>
                 </a>
             </div>
-            <p>{% if logname != follow.username %}
+            {% if logname != follow.username %}
                 {% if follow.logname_follows_username %}
-                following
+                <p>following</p>
             <form action="/following/?target={{request.path}}" method="post" enctype="multipart/form-data">
                 <input type="submit" name="unfollow" value="unfollow" />
                 <input type="hidden" name="username" value="{{follow.username}}" />
                 <input type="hidden" name="operation" value="unfollow" />
             </form>
             {% else %}
-            not following
+            <p>not following</p>
             <form action="/following/?target={{request.path}}" method="post" enctype="multipart/form-data">
                 <input type="submit" name="follow" value="follow" />
                 <input type="hidden" name="username" value="{{follow.username}}" />
@@ -49,7 +49,6 @@
             </form>
             {% endif %}
             {% endif %}
-            </p>
         </div>
         {% endfor %}
     </div>
