@@ -25,7 +25,7 @@ def show_index():
         SELECT posts.postid,
             posts.filename AS img_url,
             posts.created AS timestamp,
-            users.username,
+            users.username AS owner,
             users.filename AS owner_img_url
         FROM posts
         JOIN users ON posts.owner = users.username
