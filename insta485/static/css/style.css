@@ -24,6 +24,12 @@ h1 {
     height: auto;
 }
 
+img.logo {
+    width: 24px;
+    height: auto;
+    margin-right: 2px;
+}
+
 img {
     height: 250px;
     width: auto;
