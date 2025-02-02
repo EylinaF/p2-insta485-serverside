@@ -16,16 +16,14 @@
                 </a>
                 <h2><a href="/" class="logo">Insta485</a></h2>
             </div>
-            <div class = "right">
-                <a href = "/accounts/login/">Login</a>
-            </div>
+           
         </div>
     </header>
     <main>
         <!-- DO NOT CHANGE THIS (aside from styling) -->
       <!-- DO NOT CHANGE THIS (aside from styling) -->
        <b>{{ logname }}</b>
-       <form action="/account/?target={{ request.path }}" method="post" enctype="multipart/form-data">
+       <form action="/accounts/delete/?target=/accounts/login/" method="post" enctype="multipart/form-data">
         <input type="submit" name="delete" value="confirm delete account"/>
         <input type="hidden" name="operation" value="delete"/>
       </form>
